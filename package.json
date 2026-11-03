@@ -1,0 +1,7 @@
+{
+  "name": "horseshowdaily",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Horse Show Daily Social Arena",
+  "scripts": {"check": "node --check dist/app.js"}
+}
