@@ -3,8 +3,14 @@
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#531c29"><title>Horse Show Daily | Coming Soon</title><link rel="stylesheet" href="./styles.css"></head>
 <body>
   <div class="site-underlay" aria-hidden="true">
-    <header class="site-header"><span class="brand">Horse Show Daily <span>The Social Arena</span></span><p class="coverage">Verified public posts only</p></header>
-    <main class="shell"><section class="hero"><p class="eyebrow">The Social Arena</p><h1>The horse world, in conversation.</h1><p class="lede">A cross-platform view of public equestrian conversation, ranked by verified engagement and clearly labeled by source.</p></section><section class="controls"><span>Platform</span><span>Discipline</span><span>Top engagement</span></section><section class="feed"><article class="empty"><h2>Verified conversations are coming soon.</h2><p>The Arena is waiting for authorized public-feed connections.</p></article></section></main>
+    <header class="site-header"><a class="brand" href="./">Horse Show Daily <span>The Social Arena</span></a><p class="coverage">Verified public posts only</p></header>
+    <main class="shell">
+      <section class="hero" aria-labelledby="page-title"><p class="eyebrow">The Social Arena</p><h1 id="page-title">The horse world, in conversation.</h1><p class="lede">A cross-platform view of public equestrian conversation, ranked by verified engagement and clearly labeled by source.</p></section>
+      <section class="controls" aria-label="Feed filters"><label>Platform <select id="platform-filter"><option value="all">All platforms</option><option>Instagram</option><option>Facebook</option><option>TikTok</option><option>X</option><option>Reddit</option></select></label><label>Discipline <select id="discipline-filter"><option value="all">All disciplines</option><option>Hunter</option><option>Jumper</option><option>Dressage</option><option>Eventing</option><option>Western</option><option>Racing</option></select></label><label>Sort <select id="sort-filter"><option value="engagement">Top engagement</option><option value="recent">Most recent</option></select></label></section>
+      <section id="feed" class="feed" aria-live="polite"></section>
+    </main>
+    <footer class="site-footer">Horse Show Daily · Source links and timestamps remain attached to every verified post.</footer>
+    <script src="./app.js"></script>
   </div>
   <div class="preview-lock" role="dialog" aria-modal="true" aria-labelledby="coming-soon">
     <div class="curtain curtain-left" aria-hidden="true"></div><div class="curtain curtain-right" aria-hidden="true"></div>
