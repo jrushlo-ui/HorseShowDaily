@@ -4,7 +4,15 @@ export default {
   async fetch(request) {
     const url = new URL(request.url);
     const upstream = new URL(url.pathname + url.search, ORIGIN);
-    const response = await fetch(upstream, request);
+    const headers = new Headers(request.headers);
+    headers.delete("host");
+    headers.delete("content-length");
+    const response = await fetch(upstream.toString(), {
+      method: request.method,
+      headers,
+      body: request.method === "GET" || request.method === "HEAD" ? undefined : request.body,
+      redirect: "manual"
+    });
     const type = response.headers.get("content-type") || "";
     if (!type.includes("text/html")) return response;
     return new HTMLRewriter().on("body", new Curtain()).transform(response);
