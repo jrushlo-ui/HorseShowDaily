@@ -4,9 +4,13 @@ export default {
   async fetch(request) {
     const url = new URL(request.url);
     const upstream = new URL(url.pathname + url.search, ORIGIN);
-    const headers = new Headers(request.headers);
-    headers.delete("host");
-    headers.delete("content-length");
+    const headers = new Headers();
+    const accept = request.headers.get("accept");
+    const acceptLanguage = request.headers.get("accept-language");
+    const userAgent = request.headers.get("user-agent");
+    if (accept) headers.set("accept", accept);
+    if (acceptLanguage) headers.set("accept-language", acceptLanguage);
+    if (userAgent) headers.set("user-agent", userAgent);
     const response = await fetch(upstream.toString(), {
       method: request.method,
       headers,
