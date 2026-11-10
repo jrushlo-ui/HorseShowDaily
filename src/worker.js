@@ -1,4 +1,4 @@
-const ORIGIN = "https://49d365e2-dry-bush-1fb3.josh-7c1.workers.dev";
+const ORIGIN = "https://horseshowdaily-editorial-origin.josh-7c1.workers.dev";
 const CONTACT = "josh@driftlessdigitalventures.com";
 
 const privacy = `
