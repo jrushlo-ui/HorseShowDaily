@@ -1,52 +1,47 @@
 const ORIGIN = "https://49d365e2-dry-bush-1fb3.josh-7c1.workers.dev";
+const CONTACT = "josh@driftlessdigitalventures.com";
+
+const privacy = `
+<h1>Privacy Policy</h1><p class="effective">Effective November 9, 2026</p>
+<p>Horse Show Daily is a Driftless Digital Ventures publication. This policy explains how we collect, use, and protect information when you visit Horse Show Daily or use features we make available.</p>
+<h2>Information we collect</h2><p>We may collect information you provide, such as your name, email address, account details, newsletter preferences, show or directory submissions, advertising inquiries, and messages. We may also receive technical information such as IP address, browser and device data, referring pages, pages viewed, and approximate location derived from IP address.</p>
+<h2>How we use information</h2><p>We use information to operate and improve the publication; provide requested services; manage accounts, subscriptions, submissions, and inquiries; protect the site from fraud or abuse; measure performance; comply with law; and communicate about material service or policy changes.</p>
+<h2>Cookies and analytics</h2><p>We and our service providers may use cookies or similar technologies for essential site functions, security, preferences, and aggregate analytics. Browser controls may allow you to limit cookies, although some features may not work correctly.</p>
+<h2>Sharing</h2><p>We do not sell personal information. We may share information with vendors that help us host, secure, analyze, or communicate through the service; with professional advisers; in connection with a business transaction; or when required to protect rights, safety, or comply with law. Vendors may use information only to provide their contracted services.</p>
+<h2>Retention and security</h2><p>We retain information only as reasonably necessary for the purposes described above, legal obligations, dispute resolution, and security. We use reasonable safeguards, but no Internet service can guarantee absolute security.</p>
+<h2>Your choices</h2><p>You may unsubscribe from promotional email using the link in the message. You may also ask to access, correct, or delete personal information, subject to applicable legal exceptions, by contacting us.</p>
+<h2>Children</h2><p>Horse Show Daily is not directed to children under 13, and we do not knowingly collect personal information from children under 13. Contact us if you believe a child has provided information.</p>
+<h2>Third-party services</h2><p>Links and embedded content may lead to independent third-party services. Their privacy practices are governed by their own policies.</p>
+<h2>Changes</h2><p>We may update this policy as the service evolves. We will post the revised effective date on this page.</p>
+<h2>Contact</h2><p>Email <a href="mailto:${CONTACT}">${CONTACT}</a> with privacy questions or requests.</p>`;
+
+const terms = `
+<h1>Terms of Service</h1><p class="effective">Effective November 9, 2026</p>
+<p>These Terms govern your use of Horse Show Daily, a Driftless Digital Ventures publication. By using the site, you agree to these Terms. If you do not agree, do not use the site.</p>
+<h2>Publication and informational content</h2><p>Horse Show Daily provides editorial, event-discovery, directory, and community information. Content is for general information and may change. It is not veterinary, medical, legal, financial, or professional advice. Verify important information with the original source or a qualified professional.</p>
+<h2>Accounts and acceptable use</h2><p>If account features become available, you are responsible for accurate information and activity under your account. You may not misuse the service, interfere with its operation, attempt unauthorized access, scrape in violation of access controls, distribute malware, impersonate others, or use the service unlawfully.</p>
+<h2>User submissions</h2><p>You retain ownership of material you submit. You grant us a nonexclusive, worldwide, royalty-free license to host, reproduce, format, display, and distribute it as needed to operate and promote the service. You represent that you have the necessary rights and that your submission is accurate, lawful, and does not violate another person’s rights. We may reject or remove submissions.</p>
+<h2>Intellectual property</h2><p>The Horse Show Daily name, design, original editorial content, and site materials are owned by Driftless Digital Ventures or used with permission. Except as allowed by law, you may not reproduce or exploit them without written permission.</p>
+<h2>Third-party content, listings, and advertising</h2><p>The service may link to or display material from third parties. We do not control or endorse independent services merely by linking to them. Paid placements and sponsored material will be identified where applicable. You are responsible for evaluating third-party offers, events, services, and safety information.</p>
+<h2>Availability and changes</h2><p>We may modify, suspend, or discontinue features at any time. We do not guarantee uninterrupted operation, permanent availability of content, or that all information will be complete or error-free.</p>
+<h2>Disclaimer</h2><p>To the fullest extent permitted by law, the service is provided “as is” and “as available,” without warranties of any kind, express or implied.</p>
+<h2>Limitation of liability</h2><p>To the fullest extent permitted by law, Driftless Digital Ventures and its affiliates will not be liable for indirect, incidental, special, consequential, exemplary, or punitive damages, or for lost profits, data, goodwill, or opportunities arising from use of the service.</p>
+<h2>Changes to these Terms</h2><p>We may update these Terms. Continued use after revised Terms are posted means you accept the updated Terms.</p>
+<h2>Contact</h2><p>Email <a href="mailto:${CONTACT}">${CONTACT}</a> with questions about these Terms.</p>`;
+
+function legalPage(title, body) {
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#531c29"><title>${title} | Horse Show Daily</title><style>:root{--wine:#531c29;--gold:#d8b36a;--cream:#f7f1e7;--ink:#1f2925}*{box-sizing:border-box}body{margin:0;background:#f7f4ee;color:var(--ink);font:16px/1.7 system-ui,-apple-system,Segoe UI,sans-serif}header{background:var(--wine);padding:22px max(22px,calc((100vw - 860px)/2));color:#fff}header a{color:#fff;text-decoration:none;font-weight:800;letter-spacing:.08em;text-transform:uppercase}main{max-width:860px;margin:auto;padding:52px 22px 70px;background:#fff;min-height:calc(100vh - 150px)}h1{margin:0;color:var(--wine);font:clamp(2.4rem,7vw,4.6rem)/1 Georgia,serif}h2{margin:2.1rem 0 .4rem;color:var(--wine);font:1.45rem Georgia,serif}p{margin:.65rem 0}a{color:#7b263d}.effective{color:#66756f}footer{padding:24px;text-align:center;background:#261019;color:#f0d9b2}footer a{color:#f0d9b2;margin:0 8px}@media(max-width:600px){main{padding-top:36px}}</style></head><body><header><a href="/">Horse Show Daily</a></header><main>${body}</main><footer><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a><br>© 2026 Horse Show Daily · A Driftless Digital Ventures publication</footer></body></html>`;
+}
 
 export default {
   async fetch(request) {
     const url = new URL(request.url);
+    const path = url.pathname.replace(/\/+$/, "") || "/";
+    if (path === "/privacy" || path === "/privacy-policy") return new Response(legalPage("Privacy Policy", privacy), {headers:{"content-type":"text/html; charset=UTF-8","cache-control":"public, max-age=300"}});
+    if (path === "/terms" || path === "/terms-of-service") return new Response(legalPage("Terms of Service", terms), {headers:{"content-type":"text/html; charset=UTF-8","cache-control":"public, max-age=300"}});
     const liveUrl = new URL(url.pathname + url.search, ORIGIN).toString();
-    const html = `<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Horse Show Daily | Coming Soon</title>
-<style>
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#531c29}
-#live{position:fixed;inset:0;width:100%;height:100%;border:0;background:#fff}
-#lock{position:fixed;inset:0;z-index:2147483646;pointer-events:auto}
-#curtain{position:fixed;inset:0;z-index:2147483647;display:grid;place-items:center;background:#531c29;color:#f7f1e7;font-family:Arial,sans-serif;overflow:hidden}
-#curtain:before,#curtain:after{content:"";position:absolute;top:0;bottom:0;width:51%;background:linear-gradient(90deg,#3b111f,#7b263d 42%,#4b1728);box-shadow:inset 0 0 70px #210915;transition:transform 1s ease}
-#curtain:before{left:0}#curtain:after{right:0;transform:scaleX(-1)}
-#curtain.open:before{transform:translateX(-88%)}#curtain.open:after{transform:translateX(88%)}
-.card{position:relative;z-index:2;text-align:center;padding:32px;transition:opacity .5s ease}
-.open .card{opacity:0;pointer-events:none}
-.mark{width:78px;height:78px;margin:0 auto 22px;border:2px solid #d7b56d;border-radius:50%;display:grid;place-items:center;color:#d7b56d;font:700 22px Georgia,serif;letter-spacing:3px}
-.name{margin:0 0 18px;color:#d7b56d;text-transform:uppercase;letter-spacing:6px;font-size:14px;font-weight:700}
-h1{margin:0 0 18px;font:italic 72px/1 Georgia,serif;color:#fff}
-p{margin:0 0 28px;color:#f0d9b2;font-size:16px}
-button{border:1px solid #d7b56d;border-radius:999px;background:transparent;color:#fff;padding:14px 24px;text-transform:uppercase;letter-spacing:2px;font-size:12px;font-weight:700;cursor:pointer}
-@media(max-width:600px){h1{font-size:48px}}
-</style>
-</head>
-<body>
-<iframe id="live" src="__LIVE_URL__" title="Horse Show Daily preview"></iframe>
-<div id="lock" aria-hidden="true"></div>
-<div id="curtain" role="dialog" aria-modal="true" aria-label="Horse Show Daily coming soon">
-  <div class="card">
-    <div class="mark">HSD</div>
-    <p class="name">Horse Show Daily</p>
-    <h1>Coming Soon</h1>
-    <p>We are preparing something worth opening the gates for.</p>
-    <button type="button">Peek Behind the Curtains</button>
-  </div>
-</div>
-<script>
-const curtain=document.getElementById("curtain");
-const button=curtain.querySelector("button");
-button.addEventListener("click",()=>{curtain.classList.add("open");button.textContent="Preview Only";button.disabled=true});
-</script>
-</body>
-</html>`.replace('src="__LIVE_URL__"', 'src=' + JSON.stringify(liveUrl));
-    return new Response(html, {headers: {"content-type": "text/html; charset=UTF-8", "cache-control": "no-store"}});
+    const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Horse Show Daily | Coming Soon</title><style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#531c29}#live{position:fixed;inset:0;width:100%;height:100%;border:0;background:#fff}#lock{position:fixed;inset:0;z-index:2147483646}#curtain{position:fixed;inset:0;z-index:2147483647;display:grid;place-items:center;background:#531c29;color:#f7f1e7;font-family:Arial,sans-serif;overflow:hidden}#curtain:before,#curtain:after{content:"";position:absolute;top:0;bottom:0;width:51%;background:linear-gradient(90deg,#3b111f,#7b263d 42%,#4b1728);box-shadow:inset 0 0 70px #210915;transition:transform 1s ease}#curtain:before{left:0}#curtain:after{right:0;transform:scaleX(-1)}#curtain.open:before{transform:translateX(-88%)}#curtain.open:after{transform:translateX(88%)}.card{position:relative;z-index:2;text-align:center;padding:32px;transition:opacity .5s ease}.open .card{opacity:0;pointer-events:none}.mark{width:78px;height:78px;margin:0 auto 22px;border:2px solid #d7b56d;border-radius:50%;display:grid;place-items:center;color:#d7b56d;font:700 22px Georgia,serif;letter-spacing:3px}.name{margin:0 0 18px;color:#d7b56d;text-transform:uppercase;letter-spacing:6px;font-size:14px;font-weight:700}h1{margin:0 0 18px;font:italic 72px/1 Georgia,serif;color:#fff}.message{margin:0 0 28px;color:#f0d9b2}button{border:1px solid #d7b56d;border-radius:999px;background:transparent;color:#fff;padding:14px 24px;text-transform:uppercase;letter-spacing:2px;font-size:12px;font-weight:700;cursor:pointer}.legal{margin-top:24px;font-size:13px}.legal a{color:#f0d9b2;margin:0 8px}@media(max-width:600px){h1{font-size:48px}}</style></head><body><iframe id="live" src=${JSON.stringify(liveUrl)} title="Horse Show Daily preview"></iframe><div id="lock"></div><div id="curtain" role="dialog" aria-modal="true" aria-label="Horse Show Daily coming soon"><div class="card"><div class="mark">HSD</div><p class="name">Horse Show Daily</p><h1>Coming Soon</h1><p class="message">We are preparing something worth opening the gates for.</p><button type="button">Peek Behind the Curtains</button><p class="legal"><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a></p></div></div><script>const c=document.getElementById("curtain"),b=c.querySelector("button");b.addEventListener("click",()=>{c.classList.add("open");b.textContent="Preview Only";b.disabled=true});</script></body></html>`;
+    return new Response(html,{headers:{"content-type":"text/html; charset=UTF-8","cache-control":"no-store"}});
   }
 };
+
