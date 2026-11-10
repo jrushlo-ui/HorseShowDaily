@@ -37,6 +37,13 @@ export default {
   async fetch(request) {
     const url = new URL(request.url);
     const path = url.pathname.replace(/\/+$/, "") || "/";
+    if (path.startsWith("/api/") || path === "/confirm" || path === "/unsubscribe") {
+      const upstreamUrl = new URL(url.pathname + url.search, ORIGIN);
+      const headers = new Headers(request.headers);
+      headers.delete("host");
+      headers.delete("content-length");
+      return fetch(upstreamUrl, {method:request.method,headers,body:request.method === "GET" || request.method === "HEAD" ? undefined : request.body,redirect:"manual"});
+    }
     if (path === "/privacy" || path === "/privacy-policy") return new Response(legalPage("Privacy Policy", privacy), {headers:{"content-type":"text/html; charset=UTF-8","cache-control":"public, max-age=300"}});
     if (path === "/terms" || path === "/terms-of-service") return new Response(legalPage("Terms of Service", terms), {headers:{"content-type":"text/html; charset=UTF-8","cache-control":"public, max-age=300"}});
     const liveUrl = new URL(url.pathname + url.search, ORIGIN).toString();
